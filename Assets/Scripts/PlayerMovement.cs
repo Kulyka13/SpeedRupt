@@ -1,7 +1,8 @@
+using Mirror;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
 	public PlayerData Data;
 
@@ -67,10 +68,12 @@ public class PlayerMovement : MonoBehaviour
 		LastOnWallLeftTime -= Time.deltaTime;
 
 		LastPressedJumpTime -= Time.deltaTime;
-		#endregion
+        #endregion
 
-		#region INPUT HANDLER
-		_moveInput.x = Input.GetAxisRaw("Horizontal");
+        if (!isLocalPlayer) return;
+
+        #region INPUT HANDLER
+        _moveInput.x = Input.GetAxisRaw("Horizontal");
 		_moveInput.y = Input.GetAxisRaw("Vertical");
 
 		if (_moveInput.x != 0)
