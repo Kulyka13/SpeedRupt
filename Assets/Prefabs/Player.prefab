@@ -72,11 +72,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7377492701130721671}
   - component: {fileID: 2357067522705963631}
-  - component: {fileID: 332998677237046957}
   - component: {fileID: 6069268115569064731}
   - component: {fileID: 2818857252114395908}
-  - component: {fileID: -8800640364222585831}
   - component: {fileID: -3618140138866712054}
+  - component: {fileID: 332998677237046957}
+  - component: {fileID: -4262331024320999908}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -155,30 +155,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &332998677237046957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6934694854556037727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89b1532a40a62a0488d46d7fd577c526, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  Data: {fileID: 11400000, guid: b6dbdceb94be0714c98c8988087d0f60, type: 2}
-  _groundCheckPoint: {fileID: 2821821354395934624}
-  _groundCheckSize: {x: 0.5, y: 0.25}
-  _frontWallCheckPoint: {fileID: 6661547017906063622}
-  _backWallCheckPoint: {fileID: 8640885504679912151}
-  _wallCheckSize: {x: 0.25, y: 0.5}
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!50 &6069268115569064731
 Rigidbody2D:
   serializedVersion: 4
@@ -251,23 +227,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-8800640364222585831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6934694854556037727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 2086880938
-  serverOnly: 0
-  visibility: 0
-  hasSpawned: 0
 --- !u!114 &-3618140138866712054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,6 +261,47 @@ MonoBehaviour:
   positionSensitivity: 0.01
   rotationSensitivity: 0.01
   scaleSensitivity: 0.01
+--- !u!114 &332998677237046957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6934694854556037727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b1532a40a62a0488d46d7fd577c526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  Data: {fileID: 11400000, guid: b6dbdceb94be0714c98c8988087d0f60, type: 2}
+  _groundCheckPoint: {fileID: 2821821354395934624}
+  _groundCheckSize: {x: 0.5, y: 0.25}
+  _frontWallCheckPoint: {fileID: 6661547017906063622}
+  _backWallCheckPoint: {fileID: 8640885504679912151}
+  _wallCheckSize: {x: 0.25, y: 0.5}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &-4262331024320999908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6934694854556037727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 2086880938
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &7388977606023566802
 GameObject:
   m_ObjectHideFlags: 0
