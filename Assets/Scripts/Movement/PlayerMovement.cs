@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private Transform _frontWallCheckPoint;
 	[SerializeField] private Transform _backWallCheckPoint;
 	[SerializeField] private Vector2 _wallCheckSize = new Vector2(0.5f, 1f);
-
+	public bool IsGrounded => LastOnGroundTime > 0;
 	[Header("Layers & Tags")]
 	[SerializeField] private LayerMask _groundLayer;
 	#endregion
