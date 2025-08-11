@@ -6,6 +6,8 @@ public class MeleeAttackManager : MonoBehaviour
 	public float upwardsForce = 600;
 	public float movementTime = .1f;
 
+	public Vector2 currentAttackDirection { get; private set; }
+
 	private Animator meleeAnimator;
 	private PlayerMovement character;
 
@@ -17,7 +19,6 @@ public class MeleeAttackManager : MonoBehaviour
 
 	private void Update()
 	{
-		// Перевіряємо, чи була натиснута кнопка атаки
 		if (Input.GetButtonDown("MeleeAttack"))
 		{
 			DetermineAndTriggerMeleeAttack();
@@ -28,15 +29,14 @@ public class MeleeAttackManager : MonoBehaviour
 	{
 		Vector2 attackDirection = Vector2.zero;
 
-		// Отримуємо значення з правого стіка геймпада
-		float rightStickX = Input.GetAxis("RightStickX");
-		float rightStickY = Input.GetAxis("RightStickY");
+		// Використовуємо лівий стік геймпада
+		float horizontalInput = Input.GetAxis("Horizontal");
+		float verticalInput = Input.GetAxis("Vertical");
 
-		// Перевіряємо, чи використовується геймпад
-		if (Mathf.Abs(rightStickX) > 0.1f || Mathf.Abs(rightStickY) > 0.1f)
+		// Перевіряємо, чи використовується геймпад (рухається лівий стік)
+		if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
 		{
-			// Якщо стік відхилений, використовуємо його напрямок
-			attackDirection = new Vector2(rightStickX, rightStickY).normalized;
+			attackDirection = new Vector2(horizontalInput, verticalInput).normalized;
 		}
 		else
 		{
@@ -45,22 +45,19 @@ public class MeleeAttackManager : MonoBehaviour
 			attackDirection = (mouseWorldPosition - transform.position).normalized;
 		}
 
-		// --- Визначення сторони удару на основі вектора ---
+		currentAttackDirection = attackDirection;
+
+		// Визначаємо сторону удару
 		if (Mathf.Abs(attackDirection.x) > Mathf.Abs(attackDirection.y))
 		{
-			// Горизонтальний удар
 			if (attackDirection.x > 0)
 			{
-				// Удар вправо
 				meleeAnimator.SetTrigger("ForwardMeleeSwipe");
-				// Перевертаємо персонажа, якщо він дивиться вліво
 				transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
 			}
 			else
 			{
-				// Удар вліво
 				meleeAnimator.SetTrigger("ForwardMeleeSwipe");
-				// Перевертаємо персонажа, якщо він дивиться вправо
 				transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
 			}
 		}

@@ -12,16 +12,19 @@ public class MeleeWeapon : MonoBehaviour
 	private Vector2 direction;
 	private bool collided;
 	private bool downwardStrike;
+
 	private void Start()
 	{
 		character = GetComponentInParent<PlayerMovement>();
 		rb = GetComponentInParent<Rigidbody2D>();
 		meleeAttackManager = GetComponentInParent<MeleeAttackManager>();
 	}
+
 	private void FixedUpdate()
 	{
 		HandleMovement();
 	}
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.GetComponent<EnemyHealth>())
@@ -29,22 +32,29 @@ public class MeleeWeapon : MonoBehaviour
 			HandleCollision(collision.GetComponent<EnemyHealth>());
 		}
 	}
+
 	private void HandleCollision(EnemyHealth objHealth)
 	{
-		if(objHealth.giveUpwardForce && Input.GetAxis("Vertical") < 0 && !character.IsGrounded)
+		// Отримуємо напрямок атаки з MeleeAttackManager
+		Vector2 attackDirection = meleeAttackManager.currentAttackDirection;
+
+		// Логіка відскоку: спрацює, якщо удар був спрямований вниз (по Y < 0)
+		if (objHealth.giveUpwardForce && attackDirection.y < 0 && !character.IsGrounded)
 		{
 			direction = Vector2.up;
 			downwardStrike = true;
 			collided = true;
 		}
-		if(Input.GetAxis("Vertical") > 0 && !character.IsGrounded)
+
+		// Інша логіка для інших напрямків
+		else if (attackDirection.y > 0 && !character.IsGrounded)
 		{
 			direction = Vector2.down;
 			collided = true;
 		}
-		if((Input.GetAxis("Vertical") <= 0 && character.IsGrounded) || Input.GetAxis("Vertical") == 0)
+		else
 		{
-			if(transform.parent.localScale.x < 0)
+			if (transform.parent.localScale.x < 0)
 			{
 				direction = Vector2.right;
 			}
@@ -54,9 +64,11 @@ public class MeleeWeapon : MonoBehaviour
 			}
 			collided = true;
 		}
+
 		objHealth.Damage(damageAmount);
 		StartCoroutine(NoLongerColliding());
 	}
+
 	private void HandleMovement()
 	{
 		if (collided)
@@ -71,6 +83,7 @@ public class MeleeWeapon : MonoBehaviour
 			}
 		}
 	}
+
 	private IEnumerator NoLongerColliding()
 	{
 		yield return new WaitForSeconds(meleeAttackManager.movementTime);
