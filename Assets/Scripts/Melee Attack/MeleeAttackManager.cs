@@ -1,52 +1,72 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class MeleeAttackManager : MonoBehaviour
 {
 	public float defaultForce = 300;
 	public float upwardsForce = 600;
 	public float movementTime = .1f;
-	private bool meleeAttack;
+
 	private Animator meleeAnimator;
-	private Animator anim;
 	private PlayerMovement character;
+
 	private void Start()
 	{
-		anim = GetComponent<Animator>();
 		character = GetComponent<PlayerMovement>();
 		meleeAnimator = GetComponentInChildren<MeleeWeapon>().gameObject.GetComponent<Animator>();
 	}
+
 	private void Update()
 	{
-		CheckInput();
-	}
-	private void CheckInput()
-	{
-		if (Input.GetButton("MeleeAttack"))
+		// Перевіряємо, чи була натиснута кнопка атаки
+		if (Input.GetButtonDown("MeleeAttack"))
 		{
-			meleeAttack = true;
+			DetermineAndTriggerMeleeAttack();
+		}
+	}
+
+	private void DetermineAndTriggerMeleeAttack()
+	{
+		Vector2 attackDirection = Vector2.zero;
+
+		// Отримуємо значення з правого стіка геймпада
+		float rightStickX = Input.GetAxis("RightStickX");
+		float rightStickY = Input.GetAxis("RightStickY");
+
+		// Перевіряємо, чи використовується геймпад
+		if (Mathf.Abs(rightStickX) > 0.1f || Mathf.Abs(rightStickY) > 0.1f)
+		{
+			// Якщо стік відхилений, використовуємо його напрямок
+			attackDirection = new Vector2(rightStickX, rightStickY).normalized;
 		}
 		else
 		{
-			meleeAttack = false;
+			// В іншому випадку використовуємо мишу
+			Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			attackDirection = (mouseWorldPosition - transform.position).normalized;
 		}
-		if (meleeAttack && Input.GetAxis("Vertical") > 0)
+
+		// --- Визначення сторони удару на основі вектора ---
+		if (Mathf.Abs(attackDirection.x) > Mathf.Abs(attackDirection.y))
 		{
-			//anim.SetTrigger("UpwardMelee");
-			meleeAnimator.SetTrigger("UpwardMeleeSwipe");
+			if (attackDirection.x > 0)
+			{
+				meleeAnimator.SetTrigger("ForwardMeleeSwipe");
+			}
+			else
+			{
+				meleeAnimator.SetTrigger("ForwardMeleeSwipe");
+			}
 		}
-		if (meleeAttack && Input.GetAxis("Vertical") < 0 && !character.IsGrounded)
+		else
 		{
-			//anim.SetTrigger("DownwardMelee");
-			meleeAnimator.SetTrigger("DownwardMeleeSwipe");
-		}
-		if ((meleeAttack && Input.GetAxis("Vertical") == 0) || meleeAttack && (Input.GetAxis("Vertical") < 0 && character.IsGrounded))
-		{
-			//anim.SetTrigger("ForwardMelee");
-			meleeAnimator.SetTrigger("ForwardMeleeSwipe");
+			if (attackDirection.y > 0)
+			{
+				meleeAnimator.SetTrigger("UpwardMeleeSwipe");
+			}
+			else
+			{
+				meleeAnimator.SetTrigger("DownwardMeleeSwipe");
+			}
 		}
 	}
 }
