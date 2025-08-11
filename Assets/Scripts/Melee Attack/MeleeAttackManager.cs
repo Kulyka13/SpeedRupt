@@ -48,13 +48,20 @@ public class MeleeAttackManager : MonoBehaviour
 		// --- Визначення сторони удару на основі вектора ---
 		if (Mathf.Abs(attackDirection.x) > Mathf.Abs(attackDirection.y))
 		{
+			// Горизонтальний удар
 			if (attackDirection.x > 0)
 			{
+				// Удар вправо
 				meleeAnimator.SetTrigger("ForwardMeleeSwipe");
+				// Перевертаємо персонажа, якщо він дивиться вліво
+				transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
 			}
 			else
 			{
+				// Удар вліво
 				meleeAnimator.SetTrigger("ForwardMeleeSwipe");
+				// Перевертаємо персонажа, якщо він дивиться вправо
+				transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
 			}
 		}
 		else
