@@ -2498,7 +2498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5178305925722374781, guid: 74faceac19e7d20439d0a5b311816b7c, type: 3}
       propertyPath: defaultForce
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5178305925722374781, guid: 74faceac19e7d20439d0a5b311816b7c, type: 3}
       propertyPath: movementTime
