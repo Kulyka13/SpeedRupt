@@ -1,19 +1,19 @@
 using UnityEngine;
 
-// Гарантуємо, що цей скрипт виконається ПІСЛЯ більшості контролерів руху
 [DefaultExecutionOrder(100)]
 public class GunController : MonoBehaviour
 {
 	[SerializeField] private Animator gunAnim;
 	[SerializeField] private Transform gun;
 	[SerializeField] private float gunDistance = 1.5f;
-
-	// (Необов'язково) Якщо хочеш, щоб зброя брала позицію не з this.transform, а з окремої точки (наприклад "HandPivot")
 	[SerializeField] private Transform aimOrigin;
-
 	private Vector3 _initialGunLocalScale;
-
 	private Transform Origin => aimOrigin != null ? aimOrigin : transform;
+
+	[Header("Bullet")]
+	[SerializeField] private GameObject bulletPrefab;
+	[SerializeField] private float bulletSpeed;
+
 
 	private void Awake()
 	{
@@ -28,6 +28,8 @@ public class GunController : MonoBehaviour
 
 	private void LateUpdate()
 	{
+		if (!gun.gameObject.activeInHierarchy)
+			return;
 		// 1) Мишу в світ
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mousePos.z = 0;
@@ -56,12 +58,17 @@ public class GunController : MonoBehaviour
 
 		// 6) Постріл
 		if (Input.GetButtonDown("Shoot"))
-			Shoot();
+			Shoot(dir);
 	}
 
-	private void Shoot()
+	private void Shoot(Vector3 dir)
 	{
 		if (gunAnim != null)
 			gunAnim.SetTrigger("Shoot");
+		
+		GameObject newBullet = Instantiate(bulletPrefab, gun.position, Quaternion.identity);
+		newBullet.GetComponent<Rigidbody2D>().velocity = dir.normalized * bulletSpeed;
+		Destroy(newBullet, 10);
+
 	}
 }
