@@ -2633,6 +2633,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8301516761407646698, guid: 74faceac19e7d20439d0a5b311816b7c, type: 3}
+      propertyPath: invertY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301516761407646698, guid: 74faceac19e7d20439d0a5b311816b7c, type: 3}
       propertyPath: bulletSpeed
       value: 20
       objectReference: {fileID: 0}
