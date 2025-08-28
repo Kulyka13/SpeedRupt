@@ -1,4 +1,4 @@
-using UnityEngine;
+п»їusing UnityEngine;
 
 [DefaultExecutionOrder(100)]
 public class GunController : MonoBehaviour
@@ -14,49 +14,92 @@ public class GunController : MonoBehaviour
 	[SerializeField] private GameObject bulletPrefab;
 	[SerializeField] private float bulletSpeed;
 
+	[SerializeField] private float stickDeadzone = 0.2f;
+	[SerializeField] private float mouseMoveThreshold = 0.1f; // С‡СѓС‚Р»РёРІС–СЃС‚СЊ РґРѕ СЂСѓС…Сѓ РјРёС€РєРё
+
+	private enum InputMode { Mouse, Gamepad }
+	private InputMode currentInput = InputMode.Mouse; // Р·Р° Р·Р°РјРѕРІС‡СѓРІР°РЅРЅСЏРј РјРёС€РєР°
+
+	private Vector3 lastMousePos;
+	private Vector3 lastDir = Vector3.right; // Р·Р°РїР°СЃРЅРёР№ РЅР°РїСЂСЏРјРѕРє, СЏРєС‰Рѕ РЅС–С‡РѕРіРѕ РЅРµ СЂСѓС…Р°С”С‚СЊСЃСЏ
 
 	private void Awake()
 	{
 		if (gun == null)
 		{
-			Debug.LogError("[GunController] 'gun' не призначено.");
+			Debug.LogError("[GunController] 'gun' РЅРµ РїСЂРёР·РЅР°С‡РµРЅРѕ.");
 			enabled = false;
 			return;
 		}
 		_initialGunLocalScale = gun.localScale;
+		lastMousePos = Input.mousePosition;
 	}
 
 	private void LateUpdate()
 	{
 		if (!gun.gameObject.activeInHierarchy)
 			return;
-		// 1) Мишу в світ
-		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		mousePos.z = 0;
 
-		// 2) Нормалізований напрямок
-		Vector3 dir = (mousePos - Origin.position);
-		if (dir.sqrMagnitude < 0.000001f) return;
-		dir.Normalize();
+		Vector3 dir = Vector3.zero;
 
-		// 3) Компенсація дзеркалення від батьківського масштабу.
-		// Якщо Root фліпиться через localScale.x *= -1, то дитина дзеркалиться.
-		// Робимо і у зброї localScale.x з тим самим знаком, щоб у підсумку ГЛОБАЛЬНА орієнтація була нормальна.
-		float parentSignX = Mathf.Sign(Origin.lossyScale.x); // < 0, якщо гравець "задзеркалений"
+		// --- 1) Р§РёС‚Р°С”РјРѕ СЃС‚С–Рє ---
+		float stickX = Input.GetAxis("RightStickX");
+		float stickY = Input.GetAxis("RightStickY");
+
+		// РњС–РЅСЏС”РјРѕ РјС–СЃС†СЏРјРё + С–РЅРІРµСЂС‚СѓС”РјРѕ РІРµСЂС‚РёРєР°Р»СЊ
+		Vector2 stickInput = new Vector2(stickY, -stickX);
+
+		if (stickInput.magnitude > stickDeadzone)
+		{
+			currentInput = InputMode.Gamepad;
+			dir = stickInput.normalized;
+			lastDir = dir;
+		}
+
+		else
+		{
+			// РџРµСЂРµРІС–СЂСЏС”РјРѕ, С‡Рё СЂСѓС…Р°Р»Р°СЃСЊ РјРёС€РєР°
+			Vector3 mouseDelta = Input.mousePosition - lastMousePos;
+			if (mouseDelta.magnitude > mouseMoveThreshold)
+			{
+				currentInput = InputMode.Mouse;
+			}
+			lastMousePos = Input.mousePosition;
+
+			if (currentInput == InputMode.Mouse)
+			{
+				Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+				mousePos.z = 0;
+				dir = (mousePos - Origin.position);
+				if (dir.sqrMagnitude < 0.000001f) return;
+				dir.Normalize();
+				lastDir = dir;
+			}
+			else if (currentInput == InputMode.Gamepad)
+			{
+				// СЏРєС‰Рѕ СЃС‚С–Рє РІС–РґРїСѓС‰РµРЅРёР№ вЂ” С‚СЂРёРјР°С”РјРѕ РѕСЃС‚Р°РЅРЅС–Р№ РЅР°РїСЂСЏРјРѕРє
+				dir = lastDir;
+			}
+		}
+
+		// --- 2) РљРѕРјРїРµРЅСЃР°С†С–СЏ РґР·РµСЂРєР°Р»РµРЅРЅСЏ ---
+		float parentSignX = Mathf.Sign(Origin.lossyScale.x);
 		gun.localScale = new Vector3(
 			Mathf.Abs(_initialGunLocalScale.x) * (parentSignX < 0 ? -1f : 1f),
 			Mathf.Abs(_initialGunLocalScale.y),
 			_initialGunLocalScale.z
 		);
 
-		// 4) Поворот по куту до миші
+		// --- 3) РџРѕРІРѕСЂРѕС‚ Р·Р±СЂРѕС— РїРѕ РІРµРєС‚РѕСЂСѓ ---
 		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 		gun.rotation = Quaternion.Euler(0f, 0f, angle);
-
-		// 5) Позиція на відстані від "Origin"
 		gun.position = Origin.position + dir * gunDistance;
 
-		// 6) Постріл
+		// --- 4) РџРѕР·РёС†С–СЏ Р·Р±СЂРѕС— РЅР° РІС–РґСЃС‚Р°РЅС– РІС–Рґ Origin ---
+		gun.position = Origin.position + dir * gunDistance;
+
+
+		// --- 5) РџРѕСЃС‚СЂС–Р» ---
 		if (Input.GetButtonDown("Shoot"))
 			Shoot(dir);
 	}
@@ -65,10 +108,9 @@ public class GunController : MonoBehaviour
 	{
 		if (gunAnim != null)
 			gunAnim.SetTrigger("Shoot");
-		
+
 		GameObject newBullet = Instantiate(bulletPrefab, gun.position, Quaternion.identity);
 		newBullet.GetComponent<Rigidbody2D>().velocity = dir.normalized * bulletSpeed;
 		Destroy(newBullet, 10);
-
 	}
 }
