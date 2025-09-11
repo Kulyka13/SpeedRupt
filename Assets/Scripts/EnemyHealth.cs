@@ -17,10 +17,11 @@ public class EnemyHealth : MonoBehaviour
 	}
 	public void Damage(int amount)
 	{
-		if (damageable && !hit && currentHealth > 0)
+		if (damageable && hit == false && currentHealth > 0)
 		{
 			hit = true;
 			currentHealth -= amount;
+			healthAmount = currentHealth;
 			if (currentHealth <= 0) 
 			{
 				currentHealth = 0;
@@ -34,6 +35,7 @@ public class EnemyHealth : MonoBehaviour
 	}
 	private IEnumerator TurnOffHit()
 	{
+		hit = true;
 		yield return new WaitForSeconds(invulnerabilityTime);
 		hit = false;
 	}

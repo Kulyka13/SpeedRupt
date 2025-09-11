@@ -6,13 +6,14 @@ using UnityEngine.TextCore.Text;
 public class MeleeWeapon : MonoBehaviour
 {
 	[SerializeField] private int damageAmount = 20;
+	private float invulnerabilityTime = .2f;
 	private PlayerMovement character;
 	private Rigidbody2D rb;
 	private MeleeAttackManager meleeAttackManager;
 	private Vector2 direction;
 	private bool collided;
 	private bool downwardStrike;
-
+	//private bool hit;
 	private void Start()
 	{
 		character = GetComponentInParent<PlayerMovement>();
@@ -90,4 +91,11 @@ public class MeleeWeapon : MonoBehaviour
 		collided = false;
 		downwardStrike = false;
 	}
+	/*
+	private IEnumerator TurnOffHit()
+	{
+		yield return new WaitForSeconds(invulnerabilityTime);
+		hit = false;
+	}
+	*/
 }
