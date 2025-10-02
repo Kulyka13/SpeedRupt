@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 	[SerializeField] private int damageAmount = 20;
+	[SerializeField] private GameObject explotion;
 	private Rigidbody2D rb => GetComponent<Rigidbody2D>();
 	private void Update() => transform.right = rb.velocity;
 	/*
@@ -25,12 +26,15 @@ public class Bullet : MonoBehaviour
 		}
 		Destroy(gameObject);
 	}
-	
+
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
+		GameObject explosionInstance = Instantiate(explotion, transform.position, Quaternion.identity);
 		Destroy(gameObject);
+		Destroy(explosionInstance, 0.5f);
 	}
-	
+
+
 	private void HandleCollision(EnemyHealth objHealth)
 	{
 		objHealth.Damage(damageAmount);
