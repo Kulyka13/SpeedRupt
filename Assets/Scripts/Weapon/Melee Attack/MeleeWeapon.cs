@@ -6,7 +6,6 @@ using UnityEngine.TextCore.Text;
 public class MeleeWeapon : MonoBehaviour
 {
 	[SerializeField] private int damageAmount = 20;
-	private float invulnerabilityTime = .2f;
 	private PlayerMovement character;
 	private Rigidbody2D rb;
 	private MeleeAttackManager meleeAttackManager;
