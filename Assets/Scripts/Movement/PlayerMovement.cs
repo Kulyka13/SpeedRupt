@@ -137,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
 				_isJumpFalling = false;
 				_wallJumpStartTime = Time.time;
 				_lastWallJumpDir = (LastOnWallRightTime > 0) ? -1 : 1;
-				WallJump(_lastWallJumpDir);
+				//WallJump(_lastWallJumpDir);
 			}
 			else if (onlyGrounded && !IsJumping)
 			{
@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
 				_isJumpFalling = false;
 				_wallJumpStartTime = Time.time;
 				_lastWallJumpDir = (LastOnWallRightTime > 0) ? -1 : 1;
-				WallJump(_lastWallJumpDir);
+				//WallJump(_lastWallJumpDir);
 			}
 		}
 		#endregion
@@ -290,7 +290,7 @@ public class PlayerMovement : MonoBehaviour
 			force -= RB.velocity.y;
 		RB.AddForce(Vector2.up * force, ForceMode2D.Impulse);
 	}
-
+	/*
 	private void WallJump(int dir)
 	{
 		LastPressedJumpTime = 0;
@@ -305,8 +305,8 @@ public class PlayerMovement : MonoBehaviour
 			force.y -= RB.velocity.y;
 		RB.AddForce(force, ForceMode2D.Impulse);
 	}
+	*/
 	#endregion
-
 	#region OTHER MOVEMENT METHODS
 	private void Slide()
 	{

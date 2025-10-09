@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [DefaultExecutionOrder(100)]
 public class GunController : MonoBehaviour
@@ -7,9 +8,10 @@ public class GunController : MonoBehaviour
 	[SerializeField] private Transform gun;
 	[SerializeField] private float gunDistance = 1.5f;
 	[SerializeField] private Transform aimOrigin;
+	[SerializeField] private float coolDown;
 	private Vector3 _initialGunLocalScale;
 	private Transform Origin => aimOrigin != null ? aimOrigin : transform;
-
+	private bool canShoot = true;
 	[Header("Bullet")]
 	[SerializeField] private GameObject bulletPrefab;
 	[SerializeField] private float bulletSpeed;
@@ -100,8 +102,10 @@ public class GunController : MonoBehaviour
 
 
 		// --- 5) Постріл ---
-		if (Input.GetButtonDown("Shoot"))
+		if (Input.GetButton("Shoot") && canShoot)
+		{
 			Shoot(dir);
+		}
 	}
 
 	private void Shoot(Vector3 dir)
@@ -112,5 +116,13 @@ public class GunController : MonoBehaviour
 		GameObject newBullet = Instantiate(bulletPrefab, gun.position, Quaternion.identity);
 		newBullet.GetComponent<Rigidbody2D>().velocity = dir.normalized * bulletSpeed;
 		Destroy(newBullet, 10);
+
+		canShoot = false;              
+		StartCoroutine(ShootCooldown());
+	}
+	private IEnumerator ShootCooldown()
+	{
+		yield return new WaitForSeconds(coolDown);
+		canShoot = true;
 	}
 }
