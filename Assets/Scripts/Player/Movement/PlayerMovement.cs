@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 
 	#region Variables
 	//Components
+	private Animator animator;
 	public Rigidbody2D RB { get; private set; }
 
 	public bool IsFacingRight { get; private set; }
@@ -44,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
 	private void Awake()
 	{
 		RB = GetComponent<Rigidbody2D>();
+		animator = GetComponent<Animator>();
 	}
 
 	private void Start()
@@ -54,6 +56,16 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Update()
 	{
+		#region ANIMATIONS
+		float horizontalSpeed = Mathf.Abs(RB.velocity.x);
+		bool isRunning = Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Run");
+
+		animator.SetFloat("Speed", horizontalSpeed);
+		animator.SetBool("IsGrounded", IsGrounded);
+		animator.SetBool("IsRunning", isRunning);
+		animator.SetBool("IsJumping", IsJumping);
+		#endregion
+
 		#region TIMERS
 		LastOnGroundTime -= Time.deltaTime;
 		LastOnWallTime -= Time.deltaTime;

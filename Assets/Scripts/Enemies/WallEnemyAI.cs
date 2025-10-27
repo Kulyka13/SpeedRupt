@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+public class WallEnemyAI : MonoBehaviour
 {
 	[SerializeField] private float moveSpeed;
 	[SerializeField] private GameObject[] wayPoints;
