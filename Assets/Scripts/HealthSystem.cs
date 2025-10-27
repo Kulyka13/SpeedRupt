@@ -1,17 +1,19 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class HealthSystem : MonoBehaviour
 {
 	[SerializeField] protected bool damageable = true;
-	[SerializeField] protected int healthAmount = 100;
+	[SerializeField] protected float healthAmount = 100f;
 	[SerializeField] protected float invulnerabilityTime = 0.2f;
 	[SerializeField] private Color colorInvulnerability = Color.red;
 	[SerializeField] private float blinkInterval = 0.05f; // частота миготіння
+	[SerializeField] private Image healthBar;
 
 	protected bool hit;
-	protected int currentHealth;
+	protected float currentHealth;
 
 	private SpriteRenderer spriteRenderer;
 	private Color originalColor;
@@ -26,6 +28,13 @@ public class HealthSystem : MonoBehaviour
 	{
 		currentHealth = healthAmount;
 	}
+	private void Update()
+	{
+		if (healthBar != null)
+			healthBar.fillAmount = Mathf.Clamp(currentHealth / healthAmount, 0, 1);
+
+		healthBar.transform.localScale = new Vector3(1, 1, 1);
+	}
 
 	public void Damage(int amount)
 	{
@@ -33,7 +42,6 @@ public class HealthSystem : MonoBehaviour
 		{
 			hit = true;
 			currentHealth -= amount;
-			healthAmount = currentHealth;
 
 			if (currentHealth <= 0)
 			{

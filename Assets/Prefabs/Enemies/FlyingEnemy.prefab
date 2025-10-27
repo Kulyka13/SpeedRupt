@@ -105,8 +105,9 @@ MonoBehaviour:
   damageable: 1
   healthAmount: 100
   invulnerabilityTime: 0.2
-  colorInvulnerability: {r: 1, g: 0, b: 0, a: 1}
+  colorInvulnerability: {r: 1, g: 0.5641509, b: 0.5641509, a: 1}
   blinkInterval: 0.05
+  healthBar: {fileID: 0}
   giveUpwardForce: 1
 --- !u!114 &4289745270581030305
 MonoBehaviour:
