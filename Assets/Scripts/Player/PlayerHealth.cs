@@ -4,12 +4,14 @@ public class PlayerHealth : HealthSystem
 {
 	[SerializeField] private float damageInterval = 1f;
 	private float lastDamageTime = 0f;
-
-	private void OnCollisionStay2D(Collision2D collision)
+	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+		if (collision.gameObject.layer == LayerMask.NameToLayer("DamageCollider"))
 		{
-			EnemyDamage enemy = collision.gameObject.GetComponent<EnemyDamage>();
+			EnemyDamage enemy = collision.GetComponent<EnemyDamage>();
+			if (enemy == null)
+				enemy = collision.GetComponentInParent<EnemyDamage>();
+
 			if (enemy != null && Time.time >= lastDamageTime + damageInterval)
 			{
 				Damage(enemy.damage);
@@ -17,5 +19,6 @@ public class PlayerHealth : HealthSystem
 			}
 		}
 	}
+
 }
 
