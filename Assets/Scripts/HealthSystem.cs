@@ -32,8 +32,6 @@ public class HealthSystem : MonoBehaviour
 	{
 		if (healthBar != null)
 			healthBar.fillAmount = Mathf.Clamp(currentHealth / healthAmount, 0, 1);
-
-		healthBar.transform.localScale = new Vector3(1, 1, 1);
 	}
 
 	public void Damage(int amount)
