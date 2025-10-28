@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -23,23 +21,13 @@ public class Bullet : MonoBehaviour
 
 	private void Explode()
 	{
-		// —творюЇмо в≥зуальний ефект вибуху
+		// —творюЇмо вибух
 		GameObject explosionInstance = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-		Destroy(explosionInstance, 0.5f);
 
-		// «находимо вс≥ об'Їкти в рад≥ус≥ вибуху
+		// ¬≥дкиданн€ гравц€ у рад≥ус≥ вибуху
 		Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
-
 		foreach (Collider2D hit in hits)
 		{
-			// якщо це ворог Ч отримуЇ урон
-			EnemyHealth enemy = hit.GetComponent<EnemyHealth>();
-			if (enemy != null)
-			{
-				enemy.Damage(damageAmount);
-			}
-
-			// якщо це гравець Ч отримуЇ вибухову силу (rocket jump)
 			if (hit.CompareTag("Player"))
 			{
 				Rigidbody2D playerRb = hit.attachedRigidbody;
@@ -47,7 +35,7 @@ public class Bullet : MonoBehaviour
 				{
 					Vector2 direction = (hit.transform.position - transform.position).normalized;
 					float distance = Vector2.Distance(transform.position, hit.transform.position);
-					float forceMultiplier = Mathf.Clamp01(1f - distance / explosionRadius); // ближче Ч сильн≥ше
+					float forceMultiplier = Mathf.Clamp01(1f - distance / explosionRadius);
 					playerRb.AddForce(direction * explosionForce * forceMultiplier, ForceMode2D.Impulse);
 				}
 			}

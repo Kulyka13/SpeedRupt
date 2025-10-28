@@ -133,8 +133,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 20
   explosionPrefab: {fileID: 4838917456628698929, guid: b5118ab7fbaaecc4882f77edc5326723, type: 3}
-  explosionRadius: 10
-  explosionForce: 30
+  explosionRadius: 30
+  explosionForce: 15
 --- !u!50 &-2174367381796482664
 Rigidbody2D:
   serializedVersion: 4

@@ -24,13 +24,10 @@ public class MeleeWeapon : MonoBehaviour
 	{
 		HandleMovement();
 	}
-
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.GetComponent<EnemyHealth>())
-		{
 			HandleCollision(collision.GetComponent<EnemyHealth>());
-		}
 	}
 
 	private void HandleCollision(EnemyHealth objHealth)

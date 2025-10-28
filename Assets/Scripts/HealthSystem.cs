@@ -11,12 +11,12 @@ public class HealthSystem : MonoBehaviour
 	[SerializeField] private Color colorInvulnerability = Color.red;
 	[SerializeField] private float blinkInterval = 0.05f; // частота миготіння
 	[SerializeField] private Image healthBar;
-
 	protected bool hit;
 	protected float currentHealth;
 
 	private SpriteRenderer spriteRenderer;
 	private Color originalColor;
+
 
 	private void Awake()
 	{
