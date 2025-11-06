@@ -42,6 +42,7 @@ Transform:
   - {fileID: 4316747504504326300}
   - {fileID: 8654497151518738681}
   - {fileID: 5215177917474881464}
+  - {fileID: 7361859184163591696}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6699510195273818363
@@ -144,10 +145,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: b6dbdceb94be0714c98c8988087d0f60, type: 2}
   _groundCheckPoint: {fileID: 5227747781684384211}
-  _groundCheckSize: {x: 0.5, y: 0.5}
+  _groundCheckSize: {x: 2, y: 0.41}
   _frontWallCheckPoint: {fileID: 4316747504504326300}
   _backWallCheckPoint: {fileID: 8654497151518738681}
-  _wallCheckSize: {x: 0.25, y: 0.5}
+  _wallCheckSize: {x: 0.25, y: 3}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -165,8 +166,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunAnim: {fileID: 522855151577618827}
   gun: {fileID: 1531986232292289530}
-  gunDistance: 1.5
-  aimOrigin: {fileID: 0}
+  gunDistance: 3
+  aimOrigin: {fileID: 7361859184163591696}
   coolDown: 1
   bulletPrefab: {fileID: 5189418482097731619, guid: 406cd3cc8b834e4489ef108442383ef5, type: 3}
   bulletSpeed: 20
@@ -267,8 +268,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.48, y: -0.35}
-  m_Size: {x: 3, y: 5}
+  m_Offset: {x: 0, y: -0.35}
+  m_Size: {x: 2.5, y: 5.1}
   m_Direction: 0
 --- !u!1 &4284545181148182342
 GameObject:
@@ -295,7 +296,38 @@ Transform:
   m_GameObject: {fileID: 4284545181148182342}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.4, z: 0}
+  m_LocalPosition: {x: -0.25, y: -2.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8208671363331637889}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5024102937779559218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7361859184163591696}
+  m_Layer: 6
+  m_Name: Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7361859184163591696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5024102937779559218}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -316,7 +348,7 @@ GameObject:
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4316747504504326300
 Transform:
   m_ObjectHideFlags: 0
@@ -326,7 +358,7 @@ Transform:
   m_GameObject: {fileID: 5466180001551274810}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 0, z: 0}
+  m_LocalPosition: {x: 1.4, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -343,7 +375,7 @@ GameObject:
   - component: {fileID: 1531986232292289530}
   - component: {fileID: 1530113605753411951}
   - component: {fileID: 522855151577618827}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +392,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.4865511, z: 0.4865511}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5215177917474881464}
@@ -465,8 +497,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4388355410402436827}
   - {fileID: 1531986232292289530}
@@ -502,7 +534,7 @@ GameObject:
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8654497151518738681
 Transform:
   m_ObjectHideFlags: 0
@@ -512,7 +544,7 @@ Transform:
   m_GameObject: {fileID: 7127199815579971100}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4, y: 0, z: 0}
+  m_LocalPosition: {x: -1.4, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -531,7 +563,7 @@ GameObject:
   - component: {fileID: 4115356187150189283}
   - component: {fileID: 5239928264743881317}
   - component: {fileID: 5234158946420009017}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Melee Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,7 +580,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3, y: 0, z: 0}
-  m_LocalScale: {x: 1.06, y: 0.483584, z: 0.26338992}
+  m_LocalScale: {x: 5, y: 2.2810566, z: 1.2424053}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5215177917474881464}
@@ -633,7 +665,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7825422835165790298}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:

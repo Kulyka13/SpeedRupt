@@ -23,7 +23,7 @@ public class EnemyHealth : HealthSystem
 		if (currentHealth > 0)
 		{
 			if (animator != null)
-				animator.SetTrigger("Hurt");
+				animator.SetTrigger("GetHit");
 		}
 		else
 		{
