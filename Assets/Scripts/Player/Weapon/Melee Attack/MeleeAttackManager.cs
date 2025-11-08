@@ -7,6 +7,7 @@ public class MeleeAttackManager : MonoBehaviour
 	public float upwardsForce = 600;
 	public float movementTime = .1f;
 	public Vector2 currentAttackDirection { get; private set; }
+
 	private Animator meleeAnimator;
 	private PlayerMovement character;
 
@@ -15,6 +16,7 @@ public class MeleeAttackManager : MonoBehaviour
 		character = GetComponent<PlayerMovement>();
 		meleeAnimator = GetComponentInChildren<MeleeWeapon>().gameObject.GetComponent<Animator>();
 	}
+
 	private void Update()
 	{
 		if (Input.GetButtonDown("MeleeAttack"))
@@ -27,6 +29,7 @@ public class MeleeAttackManager : MonoBehaviour
 	{
 		Vector2 attackDirection = Vector2.zero;
 		bool isGamepadConnected = Input.GetJoystickNames().Length > 0;
+
 		if (isGamepadConnected)
 		{
 			float horizontalInput = Input.GetAxis("Horizontal");
@@ -39,30 +42,21 @@ public class MeleeAttackManager : MonoBehaviour
 			mouseWorldPosition.z = 0;
 			attackDirection = (mouseWorldPosition - transform.position).normalized;
 		}
+
 		currentAttackDirection = attackDirection;
+
+		character.FaceDirection(attackDirection.x);
+
 		if (Mathf.Abs(attackDirection.x) > Mathf.Abs(attackDirection.y))
 		{
-			if (attackDirection.x > 0)
-			{
-				meleeAnimator.SetTrigger("ForwardMeleeSwipe");
-				transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-			}
-			else
-			{
-				meleeAnimator.SetTrigger("ForwardMeleeSwipe");
-				transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-			}
+			meleeAnimator.SetTrigger("ForwardMeleeSwipe");
 		}
 		else
 		{
 			if (attackDirection.y > 0)
-			{
 				meleeAnimator.SetTrigger("UpwardMeleeSwipe");
-			}
 			else
-			{
 				meleeAnimator.SetTrigger("DownwardMeleeSwipe");
-			}
 		}
 	}
 }

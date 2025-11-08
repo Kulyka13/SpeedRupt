@@ -291,6 +291,12 @@ public class PlayerMovement : MonoBehaviour
 		transform.localScale = scale;
 		IsFacingRight = !IsFacingRight;
 	}
+	public void FaceDirection(float directionX)
+	{
+		if (directionX == 0) return;
+		CheckDirectionToFace(directionX > 0);
+	}
+
 	#endregion
 
 	#region JUMP METHODS
