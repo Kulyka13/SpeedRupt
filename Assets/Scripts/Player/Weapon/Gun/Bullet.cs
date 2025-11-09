@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-	[SerializeField] private int damageAmount = 20;
 	[SerializeField] private GameObject explosionPrefab;
 	[SerializeField] private float explosionRadius = 3f;
 	[SerializeField] private float explosionForce = 15f;
