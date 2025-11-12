@@ -25,7 +25,7 @@ public class WallEnemyAI : MonoBehaviour
 		Vector2 newPos = Vector2.MoveTowards(rb.position, target, moveSpeed * Time.fixedDeltaTime);
 		rb.MovePosition(newPos);
 
-		if (Vector2.Distance(rb.position, target) < 0.2f)
+		if (Vector2.Distance(rb.position, target) < 0.5f)
 		{
 			TakeTurn();
 		}
