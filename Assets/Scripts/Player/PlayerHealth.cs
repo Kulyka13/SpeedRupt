@@ -8,7 +8,6 @@ public class PlayerHealth : HealthSystem
 	{
 		if (collision.gameObject.layer == LayerMask.NameToLayer("DamageCollider"))
 		{
-			Debug.LogError("!!!!!!!!!!!");
 			EnemyDamage enemy = collision.GetComponent<EnemyDamage>();
 			if (enemy == null)
 				enemy = collision.GetComponentInParent<EnemyDamage>();
