@@ -1,6 +1,8 @@
+using Unity.VisualScripting;
 using UnityEngine;
 public class PlayerHealth : HealthSystem
 {
+	public GameObject gameOverUI;
 	[SerializeField] private float damageInterval = 1f;
 	private float lastDamageTime = 0f;
 
@@ -18,7 +20,12 @@ public class PlayerHealth : HealthSystem
 				lastDamageTime = Time.time;
 			}
 		}
+		if (currentHealth <= 0)
+		{
+			currentHealth = 0;
+			gameOverUI.SetActive(true);
+			gameObject.SetActive(false);
+		}
 	}
-
 }
 

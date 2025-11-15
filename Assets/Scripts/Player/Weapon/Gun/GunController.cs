@@ -10,6 +10,7 @@ public class GunController : MonoBehaviour
 	[SerializeField] private Transform aimOrigin;
 	[SerializeField] private float coolDown;
 	private Vector3 _initialGunLocalScale;
+	private bool gunFacingRight = true;
 	private Transform Origin => aimOrigin != null ? aimOrigin : transform;
 	private bool canShoot = true;
 	[Header("Bullet")]
@@ -50,6 +51,7 @@ public class GunController : MonoBehaviour
 
 		// Міняємо місцями + інвертуємо вертикаль
 		Vector2 stickInput = new Vector2(stickY, -stickX);
+		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 		if (stickInput.magnitude > stickDeadzone)
 		{
@@ -57,7 +59,6 @@ public class GunController : MonoBehaviour
 			dir = stickInput.normalized;
 			lastDir = dir;
 		}
-
 		else
 		{
 			// Перевіряємо, чи рухалась мишка
@@ -67,10 +68,8 @@ public class GunController : MonoBehaviour
 				currentInput = InputMode.Mouse;
 			}
 			lastMousePos = Input.mousePosition;
-
 			if (currentInput == InputMode.Mouse)
 			{
-				Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				mousePos.z = 0;
 				dir = (mousePos - Origin.position);
 				if (dir.sqrMagnitude < 0.000001f) return;
@@ -83,19 +82,23 @@ public class GunController : MonoBehaviour
 				dir = lastDir;
 			}
 		}
-
 		// --- 2) Компенсація дзеркалення ---
 		float parentSignX = Mathf.Sign(Origin.lossyScale.x);
+		float ySign = gunFacingRight ? 1f : -1f;
+
 		gun.localScale = new Vector3(
 			Mathf.Abs(_initialGunLocalScale.x) * (parentSignX < 0 ? -1f : 1f),
-			Mathf.Abs(_initialGunLocalScale.y),
+			Mathf.Abs(_initialGunLocalScale.y) * ySign,
 			_initialGunLocalScale.z
 		);
+
 
 		// --- 3) Поворот зброї по вектору ---
 		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 		gun.rotation = Quaternion.Euler(0f, 0f, angle);
 		gun.position = Origin.position + dir * gunDistance;
+		Debug.Log("mouseX = " + mousePos.x + "   gunX = " + gun.position.x);
+
 
 		// --- 4) Позиція зброї на відстані від Origin ---
 		gun.position = Origin.position + dir * gunDistance;
@@ -106,8 +109,27 @@ public class GunController : MonoBehaviour
 		{
 			Shoot(dir);
 		}
+
+		GunFlipController(mousePos);
 	}
 
+	private void GunFlipController(Vector3 mousePos)
+	{
+		if (mousePos.x < gun.position.x && gunFacingRight)
+		{
+			GunFlip();
+		}
+		else if (mousePos.x > gun.position.x && !gunFacingRight)
+		{
+			GunFlip();
+		}
+	}
+
+	private void GunFlip()
+	{
+		gunFacingRight = !gunFacingRight;
+		Debug.Log("FLIP: " + gunFacingRight);
+	}
 	private void Shoot(Vector3 dir)
 	{
 		if (gunAnim != null)
