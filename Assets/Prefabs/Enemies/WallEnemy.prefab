@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 2581850258938764688}
   m_Layer: 7
   m_Name: WallEnemy
-  m_TagString: Target
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,6 +109,7 @@ MonoBehaviour:
   colorInvulnerability: {r: 1, g: 0.5641509, b: 0.5641509, a: 1}
   blinkInterval: 0.05
   healthBar: {fileID: 0}
+  currentHealth: 0
   giveUpwardForce: 1
 --- !u!114 &8972432198630452733
 MonoBehaviour:

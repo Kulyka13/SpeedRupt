@@ -109,6 +109,7 @@ MonoBehaviour:
   colorInvulnerability: {r: 1, g: 0.5641509, b: 0.5641509, a: 1}
   blinkInterval: 0.05
   healthBar: {fileID: 0}
+  currentHealth: 0
   giveUpwardForce: 1
 --- !u!114 &7652846356004216540
 MonoBehaviour:
@@ -135,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d235a45ac77cd4aab2f67f5725681a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerAwarenessDistance: 30
+  _playerAwarenessDistance: 20
 --- !u!50 &4183511135079925845
 Rigidbody2D:
   serializedVersion: 4

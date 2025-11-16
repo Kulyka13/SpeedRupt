@@ -97,7 +97,6 @@ public class GunController : MonoBehaviour
 		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 		gun.rotation = Quaternion.Euler(0f, 0f, angle);
 		gun.position = Origin.position + dir * gunDistance;
-		Debug.Log("mouseX = " + mousePos.x + "   gunX = " + gun.position.x);
 
 
 		// --- 4) Позиція зброї на відстані від Origin ---
@@ -128,7 +127,6 @@ public class GunController : MonoBehaviour
 	private void GunFlip()
 	{
 		gunFacingRight = !gunFacingRight;
-		Debug.Log("FLIP: " + gunFacingRight);
 	}
 	private void Shoot(Vector3 dir)
 	{

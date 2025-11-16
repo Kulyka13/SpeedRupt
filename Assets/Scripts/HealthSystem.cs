@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class HealthSystem : MonoBehaviour
 {
 	[SerializeField] protected bool damageable = true;
@@ -21,8 +20,10 @@ public class HealthSystem : MonoBehaviour
 	private void Awake()
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
-		originalColor = spriteRenderer.color;
+		if (spriteRenderer != null)
+			originalColor = spriteRenderer.color;
 	}
+
 
 	private void Start()
 	{
@@ -60,7 +61,11 @@ public class HealthSystem : MonoBehaviour
 
 		while (elapsed < invulnerabilityTime)
 		{
-			spriteRenderer.color = visible ? colorInvulnerability : originalColor;
+			if (spriteRenderer != null)
+			{
+				spriteRenderer.color = visible ? colorInvulnerability : originalColor;
+			}
+
 			visible = !visible;
 			yield return new WaitForSeconds(blinkInterval);
 			elapsed += blinkInterval;

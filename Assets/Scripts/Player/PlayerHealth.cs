@@ -8,7 +8,7 @@ public class PlayerHealth : HealthSystem
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (collision.gameObject.layer == LayerMask.NameToLayer("DamageCollider"))
+		if (collision.gameObject.layer == LayerMask.NameToLayer("DamageCollider") || collision.CompareTag("Target"))
 		{
 			EnemyDamage enemy = collision.GetComponent<EnemyDamage>();
 			if (enemy == null)

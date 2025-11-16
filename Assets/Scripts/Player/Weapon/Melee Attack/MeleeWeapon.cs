@@ -34,7 +34,7 @@ public class MeleeWeapon : MonoBehaviour
 	{
 		// Отримуємо напрямок атаки з MeleeAttackManager
 		Vector2 attackDirection = meleeAttackManager.currentAttackDirection;
-
+		//Debug.Log(attackDirection);
 		// Логіка відскоку: спрацює, якщо удар був спрямований вниз (по Y < 0)
 		if (objHealth.giveUpwardForce && attackDirection.y < 0 && !character.IsGrounded)
 		{

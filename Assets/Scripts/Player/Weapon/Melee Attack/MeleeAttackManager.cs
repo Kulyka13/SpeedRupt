@@ -58,5 +58,6 @@ public class MeleeAttackManager : MonoBehaviour
 			else
 				meleeAnimator.SetTrigger("DownwardMeleeSwipe");
 		}
+		//Debug.Log(attackDirection);
 	}
 }
