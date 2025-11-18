@@ -804,7 +804,7 @@ Transform:
   m_GameObject: {fileID: 222623544}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.9999995, z: -10}
+  m_LocalPosition: {x: -4, y: -1.7499995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1321,7 +1321,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.9999995, z: -10}
+  m_LocalPosition: {x: -4, y: -1.7499995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12653,9 +12653,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 185057047293924071, guid: aecc0372a2e3a534da5a3cbb0144aa8d, type: 3}
+      propertyPath: attackRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 185057047293924071, guid: aecc0372a2e3a534da5a3cbb0144aa8d, type: 3}
+      propertyPath: attackOffset.x
+      value: -7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 185057047293924071, guid: aecc0372a2e3a534da5a3cbb0144aa8d, type: 3}
+      propertyPath: attackOffset.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 185057047293924071, guid: aecc0372a2e3a534da5a3cbb0144aa8d, type: 3}
+      propertyPath: attackMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 2293299361315557165, guid: aecc0372a2e3a534da5a3cbb0144aa8d, type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 3548172136695309064, guid: aecc0372a2e3a534da5a3cbb0144aa8d, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1064666456}
+    - target: {fileID: 6785906844950839261, guid: aecc0372a2e3a534da5a3cbb0144aa8d, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009237000511772947, guid: aecc0372a2e3a534da5a3cbb0144aa8d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009237000511772947, guid: aecc0372a2e3a534da5a3cbb0144aa8d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7009237000511772947, guid: aecc0372a2e3a534da5a3cbb0144aa8d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18005,11 +18037,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8208671363331637889, guid: 74faceac19e7d20439d0a5b311816b7c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 8208671363331637889, guid: 74faceac19e7d20439d0a5b311816b7c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -3.75
       objectReference: {fileID: 0}
     - target: {fileID: 8208671363331637889, guid: 74faceac19e7d20439d0a5b311816b7c, type: 3}
       propertyPath: m_LocalPosition.z

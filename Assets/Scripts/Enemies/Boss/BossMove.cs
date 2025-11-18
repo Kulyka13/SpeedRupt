@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossMove : StateMachineBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private float attackRange;
     private Transform player;
     private Rigidbody2D rb;
     private BossFlipping boss;
@@ -23,10 +24,15 @@ public class BossMove : StateMachineBehaviour
         Vector2 target = new Vector2(player.position.x, rb.position.y);
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed*Time.deltaTime);
         rb.MovePosition(newPos);
+
+        if(Vector2.Distance(player.position, rb.position) <= attackRange)
+        {
+            animator.SetTrigger("Tongue");
+        }
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        animator.ResetTrigger("Tongue");
     }
 }
