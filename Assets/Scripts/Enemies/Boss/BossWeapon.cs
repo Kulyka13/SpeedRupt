@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BossWeapon : MonoBehaviour
 {
-	[SerializeField] private int attackDamage = 10;
-	[SerializeField] int enragedAttackDamage = 10;
+	[SerializeField] private int tongueDamage = 10;
+	[SerializeField] private int enragedTongueDamage = 10;
+	[SerializeField] private int spitDamage = 20;
 	[SerializeField] private float attackRange = 20;
 	[SerializeField] private Vector3 attackOffset;
 	[SerializeField] private LayerMask attackMask;
@@ -19,7 +20,7 @@ public class BossWeapon : MonoBehaviour
 		Collider2D colInfo = Physics2D.OverlapCircle(pos, attackRange, attackMask);
 		if (colInfo != null)
 		{
-			colInfo.GetComponent<PlayerHealth>().Damage(attackDamage);
+			colInfo.GetComponent<PlayerHealth>().Damage(tongueDamage);
 		}
 	}
 	public void EnragedTongue()
@@ -31,7 +32,19 @@ public class BossWeapon : MonoBehaviour
 		Collider2D colInfo = Physics2D.OverlapCircle(pos, attackRange, attackMask);
 		if (colInfo != null)
 		{
-			colInfo.GetComponent<PlayerHealth>().Damage(enragedAttackDamage);
+			colInfo.GetComponent<PlayerHealth>().Damage(enragedTongueDamage);
+		}
+	}
+	public void Spit()
+	{
+		Vector3 pos = transform.position;
+		pos += transform.right * attackOffset.x;
+		pos += transform.up * attackOffset.y;
+
+		Collider2D colInfo = Physics2D.OverlapCircle(pos, attackRange, attackMask);
+		if (colInfo != null)
+		{
+			colInfo.GetComponent<PlayerHealth>().Damage(spitDamage);
 		}
 	}
 	private void OnDrawGizmosSelected()

@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 5973457798871493371}
   - component: {fileID: 3548172136695309064}
   - component: {fileID: 185057047293924071}
+  - component: {fileID: 8648570110435396700}
   - component: {fileID: 6998159944654485418}
   - component: {fileID: 3528290603012256838}
   - component: {fileID: 7937903072385414500}
@@ -217,9 +218,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43bfc7d11cf618845a34f3924ba366dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
-  enragedAttackDamage: 10
+  tongueDamage: 10
+  enragedTongueDamage: 10
+  spitDamage: 20
   attackRange: 20
+  attackOffset: {x: 0, y: 0, z: 0}
+  attackMask:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &8648570110435396700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2293299361315557165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 674a3e54274f51645b8d4eeca4f2b3d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healCheckRange: 20
+  healDelay: 4
+  maxHP: 4000
+  bossHealth: {fileID: 5973457798871493371}
 --- !u!50 &6998159944654485418
 Rigidbody2D:
   serializedVersion: 4

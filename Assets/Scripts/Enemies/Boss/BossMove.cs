@@ -6,6 +6,7 @@ public class BossMove : StateMachineBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float attackRange;
+    [SerializeField] private string triggerName;
     private Transform player;
     private Rigidbody2D rb;
     private BossFlipping boss;
@@ -27,12 +28,12 @@ public class BossMove : StateMachineBehaviour
 
         if(Vector2.Distance(player.position, rb.position) <= attackRange)
         {
-            animator.SetTrigger("Tongue");
+            animator.SetTrigger(triggerName);
         }
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("Tongue");
+        animator.ResetTrigger(triggerName);
     }
 }

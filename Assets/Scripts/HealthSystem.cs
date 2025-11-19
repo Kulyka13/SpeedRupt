@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviour
 {
+	public float healthAmount = 100f;
 	[SerializeField] protected bool damageable = true;
-	[SerializeField] protected float healthAmount = 100f;
 	[SerializeField] protected float invulnerabilityTime = 0.2f;
 	[SerializeField] private Color colorInvulnerability = Color.red;
 	[SerializeField] private float blinkInterval = 0.05f; // частота миготіння
@@ -54,7 +54,7 @@ public class HealthSystem : MonoBehaviour
 		}
 	}
 
-	private IEnumerator InvulnerabilityBlink()
+	protected IEnumerator InvulnerabilityBlink()
 	{
 		float elapsed = 0f;
 		bool visible = true;
