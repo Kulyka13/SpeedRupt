@@ -5,12 +5,12 @@ using UnityEngine.UI;
 public class HealthSystem : MonoBehaviour
 {
 	public float healthAmount = 100f;
+	public float currentHealth;
 	[SerializeField] protected bool damageable = true;
 	[SerializeField] protected float invulnerabilityTime = 0.2f;
 	[SerializeField] private Color colorInvulnerability = Color.red;
 	[SerializeField] private float blinkInterval = 0.05f; // частота миготіння
 	[SerializeField] private Image healthBar;
-	[HideInInspector] public float currentHealth;
 	protected bool hit;
 
 	private SpriteRenderer spriteRenderer;
@@ -29,19 +29,14 @@ public class HealthSystem : MonoBehaviour
 	{
 		currentHealth = healthAmount;
 	}
-	private void Update()
-	{
-		if (healthBar != null)
-			healthBar.fillAmount = Mathf.Clamp(currentHealth / healthAmount, 0, 1);
-	}
-
-	public void Damage(int amount)
+	public virtual void Damage(int amount)
 	{
 		if (damageable && !hit && currentHealth > 0)
 		{
 			hit = true;
 			currentHealth -= amount;
-
+			if (healthBar != null)
+				healthBar.fillAmount = Mathf.Clamp(currentHealth / healthAmount, 0, 1);
 			if (currentHealth <= 0)
 			{
 				currentHealth = 0;

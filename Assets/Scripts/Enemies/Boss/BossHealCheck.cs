@@ -5,6 +5,8 @@ public class BossHealCheck : MonoBehaviour
 	[Header("Settings")]
 	[SerializeField] private float healCheckRange = 18f;
 	[SerializeField] private float healDelay = 4f;
+	[SerializeField] private float healCooldown = 10f;
+	[SerializeField] private int healAmount = 500; 
 
 	[Header("Max HP Boss")]
 	[SerializeField] private float maxBossHP = 4000f;
@@ -14,6 +16,7 @@ public class BossHealCheck : MonoBehaviour
 	private Animator animator;
 
 	private float timeOutOfRange = 0f;
+	private float lastHealTime = -Mathf.Infinity;
 
 	private void Start()
 	{
@@ -29,13 +32,17 @@ public class BossHealCheck : MonoBehaviour
 		if (dist > healCheckRange)
 			timeOutOfRange += Time.deltaTime;
 		else
-			timeOutOfRange = 0;
+			timeOutOfRange = 0f;
+
+		bool canHeal = Time.time - lastHealTime >= healCooldown;
 
 		if (timeOutOfRange >= healDelay &&
 			bossHealth.currentHealth <= maxBossHP * 0.25f &&
-			!IsBusy())
+			!IsBusy() &&
+			canHeal)
 		{
 			animator.SetTrigger("Heal");
+			lastHealTime = Time.time; 
 		}
 	}
 
@@ -46,6 +53,12 @@ public class BossHealCheck : MonoBehaviour
 		return state.IsTag("Tongue") ||
 			   state.IsTag("Spit") ||
 			   state.IsTag("EnragedTongue") ||
-			   state.IsTag("Special");
+			   state.IsTag("Special") ||
+			   state.IsTag("Heal"); 
+	}
+
+	public void OnHealAnimationEvent()
+	{
+		bossHealth.Heal(healAmount);
 	}
 }

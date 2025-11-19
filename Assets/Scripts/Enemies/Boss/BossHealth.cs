@@ -1,21 +1,23 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BossHealth : EnemyHealth
 {
 	[Header("Boss")]
 	[SerializeField] private int enrageHealth;
-	public new void Damage(int amount)
+
+	public override void Damage(int amount)
 	{
 		if (damageable && !hit && currentHealth > 0)
 		{
 			hit = true;
 			currentHealth -= amount;
+
 			if (currentHealth < enrageHealth)
 			{
 				GetComponent<Animator>().SetBool("IsEnraged", true);
 			}
+
 			if (currentHealth <= 0)
 			{
 				currentHealth = 0;
@@ -26,5 +28,19 @@ public class BossHealth : EnemyHealth
 				StartCoroutine(InvulnerabilityBlink());
 			}
 		}
+	}
+
+	public void Heal(int amount)
+	{
+		currentHealth += amount;
+		if (currentHealth > healthAmount) currentHealth = healthAmount;
+
+		// Оновлюємо health bar якщо він є
+		/*
+		if (GetComponent<HealthSystem>() != null && GetComponent<HealthSystem>().healthBar != null)
+		{
+			GetComponent<HealthSystem>().healthBar.fillAmount = Mathf.Clamp(currentHealth / healthAmount, 0, 1);
+		}
+		*/
 	}
 }
