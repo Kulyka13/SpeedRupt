@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7009237000511772947}
   - component: {fileID: 6785906844950839261}
-  - component: {fileID: 5973457798871493371}
+  - component: {fileID: -3332836221391469272}
   - component: {fileID: 3548172136695309064}
   - component: {fileID: 185057047293924071}
   - component: {fileID: 8648570110435396700}
@@ -173,7 +173,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5973457798871493371
+--- !u!114 &-3332836221391469272
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,17 +182,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2293299361315557165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d066f984562fa8044bbbf33a6d517b1d, type: 3}
+  m_Script: {fileID: 11500000, guid: 78842d0801f26484bac29583132308fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageable: 1
   healthAmount: 4000
+  damageable: 1
   invulnerabilityTime: 0.2
   colorInvulnerability: {r: 1, g: 0, b: 0, a: 1}
   blinkInterval: 0.05
   healthBar: {fileID: 0}
   currentHealth: 0
   giveUpwardForce: 1
+  enrageHealth: 2000
 --- !u!114 &3548172136695309064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,8 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healCheckRange: 20
   healDelay: 4
-  maxHP: 4000
-  bossHealth: {fileID: 5973457798871493371}
+  maxBossHP: 4000
 --- !u!50 &6998159944654485418
 Rigidbody2D:
   serializedVersion: 4
