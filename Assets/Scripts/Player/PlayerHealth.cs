@@ -27,5 +27,13 @@ public class PlayerHealth : HealthSystem
 			gameObject.SetActive(false);
 		}
 	}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+		if (collision.gameObject.layer == LayerMask.NameToLayer("Heal"))
+		{
+			Heal healObj = collision.GetComponent<Heal>();
+			Damage(-healObj.healAmount);
+        }
+    }
 }
 
