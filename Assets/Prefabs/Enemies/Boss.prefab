@@ -98,13 +98,15 @@ GameObject:
   - component: {fileID: 6998159944654485418}
   - component: {fileID: 3528290603012256838}
   - component: {fileID: 7937903072385414500}
+  - component: {fileID: -3210017089940679287}
+  - component: {fileID: 2800041203723334494}
   m_Layer: 7
   m_Name: Boss
-  m_TagString: Enemy
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7009237000511772947
 Transform:
   m_ObjectHideFlags: 0
@@ -161,10 +163,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 9f932becb3ad43e419d409fd9697e459, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -185,15 +187,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78842d0801f26484bac29583132308fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthAmount: 4000
+  healthAmount: 3000
+  currentHealth: 3000
   damageable: 1
-  invulnerabilityTime: 0.2
+  invulnerabilityTime: 0.3
   colorInvulnerability: {r: 1, g: 0, b: 0, a: 1}
-  blinkInterval: 0.05
+  blinkInterval: 0.02
   healthBar: {fileID: 0}
-  currentHealth: 0
   giveUpwardForce: 1
-  enrageHealth: 2000
+  enrageHealth: 1500
 --- !u!114 &3548172136695309064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,8 +224,8 @@ MonoBehaviour:
   tongueDamage: 10
   enragedTongueDamage: 10
   spitDamage: 20
-  attackRange: 20
-  attackOffset: {x: 0, y: 0, z: 0}
+  attackRange: 5
+  attackOffset: {x: -7.5, y: -1, z: 0}
   attackMask:
     serializedVersion: 2
     m_Bits: 64
@@ -239,9 +241,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 674a3e54274f51645b8d4eeca4f2b3d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healCheckRange: 20
-  healDelay: 4
-  maxBossHP: 4000
+  healCheckRange: 15
+  healDelay: 1
+  healCooldown: 20
+  maxBossHP: 2000
 --- !u!50 &6998159944654485418
 Rigidbody2D:
   serializedVersion: 4
@@ -257,7 +260,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -316,7 +319,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 88b6428b2fc6b374381fa8c71723affc, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -325,3 +328,65 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-3210017089940679287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2293299361315557165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34b0560b48c93de429f73ed27bc8b3f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiScripts:
+  - {fileID: -3332836221391469272}
+  - {fileID: 3548172136695309064}
+  - {fileID: 185057047293924071}
+  - {fileID: 8648570110435396700}
+--- !u!114 &2800041203723334494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2293299361315557165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 0e6ec0acf37b5ab4e9a927623028c2fb, type: 2}
+    - {fileID: 11400000, guid: 7f0e20933a602304fba0245aaee0da9b, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -3210017089940679287}
+          m_TargetAssemblyTypeName: BossTimelineReceiver, Assembly-CSharp
+          m_MethodName: DisableAI
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -3210017089940679287}
+          m_TargetAssemblyTypeName: BossTimelineReceiver, Assembly-CSharp
+          m_MethodName: EnableAI
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
