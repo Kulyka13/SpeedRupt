@@ -6,11 +6,9 @@ public class BossHealCheck : MonoBehaviour
 	[SerializeField] private float healCheckRange = 18f;
 	[SerializeField] private float healDelay = 4f;
 	[SerializeField] private float healCooldown = 10f;
-	[SerializeField] private int healAmount = 500; 
+	[SerializeField] private float maxBossHP = 2000f;
 
-	[Header("Max HP Boss")]
-	[SerializeField] private float maxBossHP = 4000f;
-
+	private int healAmount = 250	; 
 	private BossHealth bossHealth;
 	private Transform player;
 	private Animator animator;
@@ -37,7 +35,7 @@ public class BossHealCheck : MonoBehaviour
 		bool canHeal = Time.time - lastHealTime >= healCooldown;
 
 		if (timeOutOfRange >= healDelay &&
-			bossHealth.currentHealth <= maxBossHP * 0.25f &&
+			bossHealth.currentHealth <= (maxBossHP * 0.5f)-healAmount &&
 			!IsBusy() &&
 			canHeal)
 		{
@@ -61,4 +59,9 @@ public class BossHealCheck : MonoBehaviour
 	{
 		bossHealth.Heal(healAmount);
 	}
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, healCheckRange);
+    }
 }

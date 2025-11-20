@@ -6,40 +6,45 @@ public class BossMove : StateMachineBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float attackRange;
-    [SerializeField] private string triggerName;
+	[SerializeField] private string[] attackTypes;
+    [SerializeField] private float attackCooldown = 2f;
+    private float lastAttackTime;
+    private string triggerName;
     private Transform player;
     private Rigidbody2D rb;
-    private BossFlipping boss;
+    private BossFlipping bossFlipping;
+	private BossHealth bossHealth;
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-
 		if (playerObj != null)
-		{
 			player = playerObj.transform;
-		}
 
 		rb = animator.GetComponent<Rigidbody2D>();
-		boss = animator.GetComponent<BossFlipping>();
-	}
+		bossFlipping = animator.GetComponent<BossFlipping>();
+		bossHealth = animator.GetComponent<BossHealth>();
+        lastAttackTime = -Mathf.Infinity;
+    }
 
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		boss.LookAtPlayer();
+		bossFlipping.LookAtPlayer();
 
 		Vector2 target = new Vector2(player.position.x, rb.position.y);
 		Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.deltaTime);
 		rb.MovePosition(newPos);
+        if (Time.time < lastAttackTime + attackCooldown)
+            return;
 
-		if (Vector2.Distance(player.position, rb.position) <= attackRange)
-		{
-			animator.SetTrigger(triggerName);
-		}
-	}
+        if (Vector2.Distance(player.position, rb.position) <= attackRange)
+        {
+            string triggerName = attackTypes[Random.Range(0, attackTypes.Length)];
+            animator.SetTrigger(triggerName);
 
-
-	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        animator.ResetTrigger(triggerName);
+            lastAttackTime = Time.time;
+        }
     }
+
+
+	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex){}
 }

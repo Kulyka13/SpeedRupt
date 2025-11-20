@@ -41,11 +41,11 @@ public class WaveSpawner : MonoBehaviour
 			GameObject randomHeal = currentWave.heals[Random.Range(0, currentWave.heals.Length)];
             Transform randomPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 			Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
-            Instantiate(randomHeal, randomPoint.position, Quaternion.identity);
             currentWave.numberOfEnemies--;
 			nextSpawnTime = Time.time + currentWave.spawnInterval;
 			if (currentWave.numberOfEnemies == 0)
 			{
+				Instantiate(randomHeal, randomPoint.position, Quaternion.identity);
 				canSpawn = false;
 			}
 		}

@@ -4,7 +4,7 @@ using UnityEngine;
 public class BossHealth : EnemyHealth
 {
 	[Header("Boss")]
-	[SerializeField] private int enrageHealth;
+	public int enrageHealth;
 
 	public override void Damage(int amount)
 	{
@@ -29,7 +29,7 @@ public class BossHealth : EnemyHealth
 			}
 		}
 	}
-
+	/*
 	public void Heal(int amount)
 	{
 		currentHealth += amount;
@@ -42,5 +42,5 @@ public class BossHealth : EnemyHealth
 			GetComponent<HealthSystem>().healthBar.fillAmount = Mathf.Clamp(currentHealth / healthAmount, 0, 1);
 		}
 		*/
-	}
+	//}
 }

@@ -48,8 +48,15 @@ public class HealthSystem : MonoBehaviour
 			}
 		}
 	}
-
-	protected IEnumerator InvulnerabilityBlink()
+	public void Heal(int amount)
+	{
+		currentHealth += amount;
+		if (currentHealth > healthAmount)
+			currentHealth = healthAmount;
+		if (healthBar != null)
+			healthBar.fillAmount = Mathf.Clamp(currentHealth / healthAmount, 0, 1);
+    }
+    protected IEnumerator InvulnerabilityBlink()
 	{
 		float elapsed = 0f;
 		bool visible = true;

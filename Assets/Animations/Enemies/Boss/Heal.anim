@@ -123,5 +123,5 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 200
+    intParameter: 500
     messageOptions: 0

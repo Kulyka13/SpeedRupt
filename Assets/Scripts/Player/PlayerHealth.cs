@@ -32,7 +32,8 @@ public class PlayerHealth : HealthSystem
 		if (collision.gameObject.layer == LayerMask.NameToLayer("Heal"))
 		{
 			Heal healObj = collision.GetComponent<Heal>();
-			Damage(-healObj.healAmount);
+			Heal(healObj.healAmount);
+			Destroy(collision.gameObject);
         }
     }
 }

@@ -174,9 +174,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae46ad9ce2692aa4f9bcf94f5cd560f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12
+  speed: 7
   attackRange: 10
-  triggerName: EnragedTongue
+  attackTypes:
+  - EnragedTongue
+  - Spit
+  attackCooldown: 1.5
 --- !u!1101 &-1866780019713835112
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -249,7 +252,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: b8fefa864dfeaf242a623f757274b2e7, type: 2}
-  m_Tag: 
+  m_Tag: Heal
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -266,9 +269,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae46ad9ce2692aa4f9bcf94f5cd560f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 7
   attackRange: 10
-  triggerName: Tongue
+  attackTypes:
+  - Tongue
+  attackCooldown: 1.5
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
