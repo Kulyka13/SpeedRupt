@@ -10,8 +10,9 @@ public class HealthSystem : MonoBehaviour
 	[SerializeField] protected float invulnerabilityTime = 0.2f;
 	[SerializeField] private Color colorInvulnerability = Color.red;
 	[SerializeField] private float blinkInterval = 0.05f; // частота миготіння
-	[SerializeField] private Image healthBar;
-	protected bool hit;
+	[SerializeField] public Image healthBar;
+    [SerializeField] private GameObject gameOverUI;
+    protected bool hit;
 
 	private SpriteRenderer spriteRenderer;
 	private Color originalColor;
@@ -39,7 +40,10 @@ public class HealthSystem : MonoBehaviour
 				healthBar.fillAmount = Mathf.Clamp(currentHealth / healthAmount, 0, 1);
 			if (currentHealth <= 0)
 			{
-				currentHealth = 0;
+				if (gameOverUI != null)
+					gameOverUI.SetActive(true);
+                
+                currentHealth = 0;
 				gameObject.SetActive(false);
 			}
 			else

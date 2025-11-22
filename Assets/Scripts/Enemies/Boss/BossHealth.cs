@@ -5,6 +5,7 @@ public class BossHealth : EnemyHealth
 {
 	[Header("Boss")]
 	public int enrageHealth;
+	[SerializeField] private GameObject winUI; 
 
 	public override void Damage(int amount)
 	{
@@ -12,8 +13,9 @@ public class BossHealth : EnemyHealth
 		{
 			hit = true;
 			currentHealth -= amount;
-
-			if (currentHealth < enrageHealth)
+            if (healthBar != null)
+                healthBar.fillAmount = Mathf.Clamp(currentHealth / healthAmount, 0, 1);
+            if (currentHealth < enrageHealth)
 			{
 				GetComponent<Animator>().SetBool("IsEnraged", true);
 			}
@@ -21,7 +23,8 @@ public class BossHealth : EnemyHealth
 			if (currentHealth <= 0)
 			{
 				currentHealth = 0;
-				gameObject.SetActive(false);
+				winUI.SetActive(true);
+                gameObject.SetActive(false);
 			}
 			else
 			{
@@ -37,10 +40,7 @@ public class BossHealth : EnemyHealth
 
 		// Îíîâëþºìî health bar ÿêùî â³í º
 		/*
-		if (GetComponent<HealthSystem>() != null && GetComponent<HealthSystem>().healthBar != null)
-		{
-			GetComponent<HealthSystem>().healthBar.fillAmount = Mathf.Clamp(currentHealth / healthAmount, 0, 1);
-		}
+
 		*/
 	//}
 }

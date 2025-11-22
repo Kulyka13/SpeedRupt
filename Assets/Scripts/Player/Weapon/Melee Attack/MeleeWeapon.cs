@@ -12,8 +12,9 @@ public class MeleeWeapon : MonoBehaviour
 	private Vector2 direction;
 	private bool collided;
 	private bool downwardStrike;
-	//private bool hit;
-	private void Start()
+    private Coroutine resetRoutine;
+    //private bool hit;
+    private void Start()
 	{
 		character = GetComponentInParent<PlayerMovement>();
 		rb = GetComponentInParent<Rigidbody2D>();
@@ -61,10 +62,12 @@ public class MeleeWeapon : MonoBehaviour
 			}
 			collided = true;
 		}
-
 		objHealth.Damage(damageAmount);
-		StartCoroutine(NoLongerColliding());
-	}
+        if (resetRoutine != null)
+            StopCoroutine(resetRoutine);
+
+        resetRoutine = StartCoroutine(NoLongerColliding());
+    }
 
 	private void HandleMovement()
 	{
@@ -87,11 +90,20 @@ public class MeleeWeapon : MonoBehaviour
 		collided = false;
 		downwardStrike = false;
 	}
-	/*
+    /*
 	private IEnumerator TurnOffHit()
 	{
 		yield return new WaitForSeconds(invulnerabilityTime);
 		hit = false;
 	}
 	*/
+    private void OnDisable()
+    {
+        if (resetRoutine != null)
+            StopCoroutine(resetRoutine);
+
+        collided = false;
+        downwardStrike = false;
+        resetRoutine = null;
+    }
 }

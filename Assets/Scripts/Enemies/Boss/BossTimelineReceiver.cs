@@ -18,5 +18,6 @@ public class BossTimelineReceiver : MonoBehaviour
         //bossAnimator.enabled = true;
         foreach (var script in aiScripts)
             script.enabled = true;
+        bossAnimator.SetBool("Started", true);
     }
 }

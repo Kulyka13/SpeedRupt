@@ -103,13 +103,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d066f984562fa8044bbbf33a6d517b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageable: 1
   healthAmount: 100
+  currentHealth: 0
+  damageable: 1
   invulnerabilityTime: 0.2
   colorInvulnerability: {r: 1, g: 0.5641509, b: 0.5641509, a: 1}
   blinkInterval: 0.05
   healthBar: {fileID: 0}
-  currentHealth: 0
   giveUpwardForce: 1
 --- !u!114 &7652846356004216540
 MonoBehaviour:

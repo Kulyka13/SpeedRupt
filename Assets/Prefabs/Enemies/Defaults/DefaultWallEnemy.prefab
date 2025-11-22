@@ -13,12 +13,11 @@ GameObject:
   - component: {fileID: 4872112158564640384}
   - component: {fileID: 8972432198630452733}
   - component: {fileID: 3981912833336819598}
-  - component: {fileID: 8070182338174450189}
   - component: {fileID: 3278655529275792329}
   - component: {fileID: 2581850258938764688}
   m_Layer: 7
   m_Name: DefaultWallEnemy
-  m_TagString: Target
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d066f984562fa8044bbbf33a6d517b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthAmount: 100
+  healthAmount: 300
   currentHealth: 0
   damageable: 0
   invulnerabilityTime: 0.2
@@ -123,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1578ec9a8a8a9854a954c90c58cbeb6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 8
   wayPoints: []
 --- !u!50 &3981912833336819598
 Rigidbody2D:
@@ -152,19 +151,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8070182338174450189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4463332067979586524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a13cd60e809026a4a84b6441cf623388, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
 --- !u!95 &3278655529275792329
 Animator:
   serializedVersion: 5

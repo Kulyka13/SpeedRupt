@@ -8,7 +8,7 @@ public class BossHealCheck : MonoBehaviour
 	[SerializeField] private float healCooldown = 10f;
 	[SerializeField] private float maxBossHP = 2000f;
 
-	private int healAmount = 250	; 
+	private int healAmount = 300	; 
 	private BossHealth bossHealth;
 	private Transform player;
 	private Animator animator;
@@ -58,8 +58,12 @@ public class BossHealCheck : MonoBehaviour
 	public void OnHealAnimationEvent()
 	{
 		bossHealth.Heal(healAmount);
-	}
-    private void OnDrawGizmosSelected()
+        if (GetComponent<BossHealth>() != null && GetComponent<BossHealth>().healthBar != null)
+        {
+            GetComponent<BossHealth>().healthBar.fillAmount = Mathf.Clamp(bossHealth.currentHealth / bossHealth.healthAmount, 0, 1);
+        }
+    }
+	private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, healCheckRange);

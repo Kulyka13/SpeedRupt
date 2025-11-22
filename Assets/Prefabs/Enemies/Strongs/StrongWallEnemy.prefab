@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d066f984562fa8044bbbf33a6d517b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthAmount: 100
+  healthAmount: 600
   currentHealth: 0
   damageable: 0
   invulnerabilityTime: 0.2
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a13cd60e809026a4a84b6441cf623388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 25
 --- !u!70 &3736518010621091788
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

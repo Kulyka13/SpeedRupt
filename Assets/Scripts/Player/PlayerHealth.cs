@@ -2,11 +2,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 public class PlayerHealth : HealthSystem
 {
-	public GameObject gameOverUI;
 	[SerializeField] private float damageInterval = 1f;
 	private float lastDamageTime = 0f;
-
-	private void OnTriggerStay2D(Collider2D collision)
+    private void Update()
+    {
+    }
+    private void OnTriggerStay2D(Collider2D collision)
 	{
 		if (collision.gameObject.layer == LayerMask.NameToLayer("DamageCollider") || collision.CompareTag("Target"))
 		{
@@ -20,12 +21,10 @@ public class PlayerHealth : HealthSystem
 				lastDamageTime = Time.time;
 			}
 		}
-		if (currentHealth <= 0)
-		{
-			currentHealth = 0;
-			gameOverUI.SetActive(true);
-			gameObject.SetActive(false);
-		}
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+        }
 	}
     private void OnTriggerEnter2D(Collider2D collision)
     {

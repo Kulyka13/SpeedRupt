@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BossHealAction : MonoBehaviour
 {
-	[SerializeField] private int healAmount = 200;
+	[SerializeField] private int healAmount = 300;
 
 	private BossHealth bossHealth;
 

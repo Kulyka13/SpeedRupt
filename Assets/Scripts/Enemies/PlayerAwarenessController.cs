@@ -11,7 +11,11 @@ public class PlayerAwarenessController : MonoBehaviour
 
 	private void Awake()
 	{
-		_player = FindAnyObjectByType<PlayerMovement>().transform;
+		if(FindAnyObjectByType<PlayerMovement>() == null)
+		{
+			return;
+        }
+        _player = FindAnyObjectByType<PlayerMovement>().transform;
 	}
 
 	private void Update()

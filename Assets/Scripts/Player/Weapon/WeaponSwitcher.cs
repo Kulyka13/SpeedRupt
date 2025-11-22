@@ -2,49 +2,67 @@ using UnityEngine;
 
 public class WeaponSwitcher : MonoBehaviour
 {
-	public GameObject[] weapons;
-	private int currentWeaponIndex = 0;
+    public GameObject[] weapons;
+    private int currentWeaponIndex = 0;
 
-	void Start()
-	{
-		SelectWeapon(currentWeaponIndex);
-	}
+    void Start()
+    {
+        SelectWeapon(currentWeaponIndex);
+    }
 
-	void Update()
-	{
-		if (Input.GetButtonDown("R2"))
-		{
-			currentWeaponIndex++;
-			if (currentWeaponIndex >= weapons.Length)
-				currentWeaponIndex = 0;
+    void Update()
+    {
+        if (Input.GetButtonDown("R2"))
+        {
+            NextWeapon();
+        }
 
-			SelectWeapon(currentWeaponIndex);
-		}
+        if (Input.GetButtonDown("L2"))
+        {
+            PreviousWeapon();
+        }
 
-		if (Input.GetButtonDown("L2"))
-		{
-			currentWeaponIndex--;
-			if (currentWeaponIndex < 0)
-				currentWeaponIndex = weapons.Length - 1;
+        if (Input.GetKeyDown(KeyCode.Alpha1)) SelectWeapon(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) SelectWeapon(1);
 
-			SelectWeapon(currentWeaponIndex);
-		}
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-		if (Input.GetKeyDown(KeyCode.Alpha1)) { SelectWeapon(0); }
-		if (Input.GetKeyDown(KeyCode.Alpha2)) { SelectWeapon(1); }
-	}
+        if (scroll > 0f)           
+            NextWeapon();
 
-	void SelectWeapon(int index)
-	{
-		if (index < 0 || index >= weapons.Length)
-		{
-			Debug.LogError("Invalid weapon index!");
-			return;
-		}
+        if (scroll < 0f)            
+            PreviousWeapon();
+    }
 
-		for (int i = 0; i < weapons.Length; i++)
-		{
-			weapons[i].SetActive(i == index);
-		}
-	}
+    void NextWeapon()
+    {
+        currentWeaponIndex++;
+        if (currentWeaponIndex >= weapons.Length)
+            currentWeaponIndex = 0;
+
+        SelectWeapon(currentWeaponIndex);
+    }
+
+    void PreviousWeapon()
+    {
+        currentWeaponIndex--;
+        if (currentWeaponIndex < 0)
+            currentWeaponIndex = weapons.Length - 1;
+
+        SelectWeapon(currentWeaponIndex);
+    }
+
+    void SelectWeapon(int index)
+    {
+        if (index < 0 || index >= weapons.Length)
+        {
+            Debug.LogError("Invalid weapon index!");
+            return;
+        }
+
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            weapons[i].SetActive(i == index);
+        }
+    }
 }

@@ -25,19 +25,28 @@ public class WaveSpawner : MonoBehaviour
     private int currentWaveNumber;
     private bool canSpawn = true;
     private float nextSpawnTime;
-
+    private void Start()
+    {
+        nextSpawnTime = Time.time;
+    }
     private void Update()
     {
+        if (currentWaveNumber >= waves.Length)
+            return; 
+
         currentWave = waves[currentWaveNumber];
-        SpawnWave();
+
+        if (canSpawn)
+            SpawnWave();
 
         GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         if (totalEnemies.Length == 0 && !canSpawn)
         {
-            if (currentWaveNumber + 1 < waves.Length)
+            currentWaveNumber++;
+
+            if (currentWaveNumber < waves.Length)
             {
-                currentWaveNumber++;
                 canSpawn = true;
             }
             else
@@ -47,27 +56,35 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
+
     private void SpawnWave()
     {
-        if (canSpawn && nextSpawnTime < Time.time)
+        if (currentWave.typeOfEnemies.Length == 0) return; 
+
+        if (canSpawn && nextSpawnTime <= Time.time)
         {
             Transform randomPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-
             GameObject randomEnemy = currentWave.typeOfEnemies[Random.Range(0, currentWave.typeOfEnemies.Length)];
             Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
 
             currentWave.numberOfEnemies--;
             nextSpawnTime = Time.time + currentWave.spawnInterval;
 
-            if (currentWave.numberOfEnemies == 0)
+            if (currentWave.numberOfEnemies <= 0)
             {
-                GameObject randomHeal = currentWave.heals[Random.Range(0, currentWave.heals.Length)];
-                Instantiate(randomHeal, randomPoint.position, Quaternion.identity);
-
                 canSpawn = false;
+
+                if (currentWave.heals.Length > 0)
+                {
+                    GameObject randomHeal = currentWave.heals[Random.Range(0, currentWave.heals.Length)];
+                    if (randomHeal != null)
+                        Instantiate(randomHeal, randomPoint.position, Quaternion.identity);
+                }
             }
         }
     }
+
+
 
     private void TriggerFinalEvent()
     {
