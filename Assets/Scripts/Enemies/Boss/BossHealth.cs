@@ -5,7 +5,8 @@ public class BossHealth : EnemyHealth
 {
 	[Header("Boss")]
 	public int enrageHealth;
-	[SerializeField] private GameObject winUI; 
+	[SerializeField] private GameObject winUI;
+	[SerializeField] private GameObject[] objectsToDisable;
 
 	public override void Damage(int amount)
 	{
@@ -24,9 +25,13 @@ public class BossHealth : EnemyHealth
 			{
 				currentHealth = 0;
 				winUI.SetActive(true);
+
+                foreach (var obj in objectsToDisable)
+                    if (obj != null) obj.SetActive(false);
+
                 gameObject.SetActive(false);
-			}
-			else
+            }
+            else
 			{
 				StartCoroutine(InvulnerabilityBlink());
 			}

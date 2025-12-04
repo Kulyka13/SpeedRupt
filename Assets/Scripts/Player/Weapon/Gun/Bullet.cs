@@ -1,3 +1,4 @@
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -20,11 +21,9 @@ public class Bullet : MonoBehaviour
 
 	private void Explode()
 	{
-		// Створюємо вибух
 		GameObject explosionInstance = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
-		// Відкидання гравця у радіусі вибуху
-		Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
 		foreach (Collider2D hit in hits)
 		{
 			if (hit.CompareTag("Player"))
