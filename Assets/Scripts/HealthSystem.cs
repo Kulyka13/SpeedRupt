@@ -42,8 +42,8 @@ public class HealthSystem : MonoBehaviour
 			{
 				if (gameOverUI != null)
 				{
-					Time.timeScale = 0f;
 					gameOverUI.SetActive(true);
+					//Time.timeScale = 0f;
 				}
                 
                 currentHealth = 0;

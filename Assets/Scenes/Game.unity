@@ -446,8 +446,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -186.23999, y: -76.375}
-  m_SizeDelta: {x: 322.48, y: 102.75}
+  m_AnchoredPosition: {x: -222.93, y: -76.375}
+  m_SizeDelta: {x: 395.86, y: 102.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &76107914
 MonoBehaviour:
@@ -503,7 +503,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -827,7 +827,7 @@ GameObject:
   - component: {fileID: 120968989}
   - component: {fileID: 120968988}
   m_Layer: 0
-  m_Name: WaveSpawner (1)
+  m_Name: CheatSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -854,20 +854,6 @@ MonoBehaviour:
     - {fileID: 1462405939640160955, guid: f931a36b3d737644597bfb8cf65bb015, type: 3}
     spawnInterval: 1
   spawnPoints:
-  - {fileID: 1845391597}
-  - {fileID: 2075117014}
-  - {fileID: 810387267}
-  - {fileID: 746692552}
-  - {fileID: 1710122274}
-  - {fileID: 1552082276}
-  - {fileID: 1748934089}
-  - {fileID: 1507989660}
-  - {fileID: 807485069}
-  - {fileID: 119956930}
-  - {fileID: 1030849421}
-  - {fileID: 1002066442}
-  - {fileID: 1081011155}
-  - {fileID: 1766487280}
   - {fileID: 340939754}
   objectsToDisable:
   - {fileID: 931419019}
